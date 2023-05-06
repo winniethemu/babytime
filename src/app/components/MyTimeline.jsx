@@ -12,6 +12,7 @@ import BackupIcon from '@mui/icons-material/Backup';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 
 import { EVENT_TYPE } from '../const';
+import { formatDate } from '../util';
 
 function createItem(metadata) {
   const { start, end, icon, desc } = metadata;
@@ -24,7 +25,7 @@ function createItem(metadata) {
           variant="body2"
           color="text.secondary"
         >
-          {new Date(start).toTimeString()}
+          {formatDate(start)}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
@@ -47,7 +48,7 @@ function createItem(metadata) {
           variant="body2"
           color="text.secondary"
         >
-          {new Date(start).toTimeString()}
+          {formatDate(start)}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
@@ -67,7 +68,7 @@ function createItem(metadata) {
           variant="body2"
           color="text.secondary"
         >
-          {new Date(end).toTimeString()}
+          {formatDate(end)}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
