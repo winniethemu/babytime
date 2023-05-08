@@ -8,7 +8,6 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import AirlineSeatFlatIcon from '@mui/icons-material/AirlineSeatFlat';
 import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
 import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
-import BackupIcon from '@mui/icons-material/Backup';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 
 import { EVENT_TYPE } from '../const';
@@ -94,18 +93,18 @@ export default function MyTimeline({ data }) {
           case EVENT_TYPE.feed:
             icon = <LocalDrinkIcon />;
             return createItem({ ...item, desc: 'Feed', icon });
-          case EVENT_TYPE.burp:
-            icon = <RecordVoiceOverIcon />;
-            return createItem({ ...item, desc: 'Burp', icon });
           case EVENT_TYPE.spit:
-            icon = <BackupIcon />;
+            icon = <RecordVoiceOverIcon />;
             return createItem({ ...item, desc: 'Spit', icon });
           case EVENT_TYPE.tummy:
             icon = <AirlineSeatFlatIcon />;
             return createItem({ ...item, desc: 'Tummy', icon });
-          case EVENT_TYPE.nappy:
+          case EVENT_TYPE.nappy1:
             icon = <BabyChangingStationIcon />;
-            return createItem({ ...item, desc: 'Nappy', icon });
+            return createItem({ ...item, desc: 'Nappy One', icon });
+          case EVENT_TYPE.nappy2:
+            icon = <BabyChangingStationIcon />;
+            return createItem({ ...item, desc: 'Nappy Two', icon });
         }
       })}
     </Timeline>
