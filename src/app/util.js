@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon';
+import dayjs from 'dayjs';
 
 export function formatDate(timestamp) {
-  return DateTime.fromMillis(timestamp).toLocaleString(DateTime.DATETIME_MED);
+  return dayjs(timestamp).format('MMM D, YYYY h:mm A');
 }

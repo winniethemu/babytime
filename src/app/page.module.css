@@ -19,3 +19,18 @@
 .aside {
   width: 40%;
 }
+
+.formControl {
+  margin-top: 10px;
+}
+
+.formSubmit {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.formSubmit button {
+  width: 50%;
+}

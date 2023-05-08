@@ -1,19 +1,21 @@
 'use client';
 
 import React from 'react';
-import { Box, FormControl, InputLabel, MenuItem, Select, Tab } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
+import { EVENT_TYPE } from './const';
 import MyTimeline from './components/MyTimeline';
 import styles from './page.module.css';
 
 //TODO: remove before launch
 import { createEvents } from '../../__mocks__/eventMock';
-import { EVENT_TYPE } from './const';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 export default function Home() {
   const [activity, setActivity] = React.useState('');
-  const [tab, setTab] = React.useState('start-time');
+  const [startTime, setStartTime] = React.useState(null);
+  const [endTime, setEndTime] = React.useState(null);
 
   const data = createEvents();
 
@@ -35,7 +37,7 @@ export default function Home() {
         </main>
         <aside className={styles.aside}>
           <form onSubmit={handleSubmit}>
-            <FormControl size="small" fullWidth>
+            <FormControl fullWidth className={styles.formControl}>
               <InputLabel id="activity-label">Activity</InputLabel>
               <Select
                 labelId='activity-label'
@@ -50,19 +52,28 @@ export default function Home() {
                 <MenuItem value={EVENT_TYPE.tummy}>Tummy</MenuItem>
               </Select>
             </FormControl>
-            <TabContext value={tab}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <TabList onChange={(e, newValue) => setTab(newValue)}>
-                  <Tab label="Start Time" value="start-time" />
-                  <Tab label="End Time" value="end-time" />
-                </TabList>
-              </Box>
-              <TabPanel value="start-time">
-
-              </TabPanel>
-              <TabPanel value="end-time">
-              </TabPanel>
-            </TabContext>
+            <FormControl fullWidth className={styles.formControl}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                  label="Start Time"
+                  value={startTime}
+                  onChange={(dt) => setStartTime(dt.valueOf())}
+                />
+              </LocalizationProvider>
+            </FormControl>
+            <FormControl fullWidth className={styles.formControl}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                  label="End Time"
+                  value={endTime}
+                  onChange={(dt) => setEndTime(dt.valueOf())}
+                />
+              </LocalizationProvider>
+            </FormControl>
+            <Box className={styles.formSubmit}>
+              <Button variant="contained">Submit</Button>
+              <Button variant="outlined">Reset</Button>
+            </Box>
           </form>
         </aside>
       </div>

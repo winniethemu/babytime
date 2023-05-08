@@ -88,7 +88,7 @@ export default function MyTimeline({ data }) {
   return (
     <Timeline position="alternate">
       {data.map((item, index) => {
-        let icon, desc;
+        let icon;
         switch (item.type) {
           case EVENT_TYPE.feed:
             icon = <LocalDrinkIcon />;
