@@ -21,14 +21,20 @@ export default function Home() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('Form submitting...');
+    console.log(activity, startTime, endTime);
+  }
+
+  function handleReset() {
+    setActivity('');
+    setStartTime(null);
+    setEndTime(null);
   }
 
   return (
     <>
       <div className={styles.navbar}>
         <div className={styles.content}>
-          <h1>Babytime</h1>
+          <h1 className={styles.title}>Babytime</h1>
         </div>
       </div>
       <div className={styles.content}>
@@ -67,12 +73,19 @@ export default function Home() {
                   label="End Time"
                   value={endTime}
                   onChange={(dt) => setEndTime(dt.valueOf())}
+                  disabled={activity !== EVENT_TYPE.feed}
                 />
               </LocalizationProvider>
             </FormControl>
             <Box className={styles.formSubmit}>
-              <Button variant="contained">Submit</Button>
-              <Button variant="outlined">Reset</Button>
+              <Button
+                variant="contained"
+                onClick={handleSubmit}
+              >Submit</Button>
+              <Button
+                variant="outlined"
+                onClick={handleReset}
+              >Reset</Button>
             </Box>
           </form>
         </aside>

@@ -12,6 +12,11 @@
   padding: 10px 40px;
 }
 
+.title {
+  width: 60%;
+  text-align: center;
+}
+
 .main {
   width: 60%;
 }
