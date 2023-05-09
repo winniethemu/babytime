@@ -19,10 +19,13 @@
 
 .main {
   width: 60%;
+  margin-top: 40px;
+  text-align: center;
 }
 
 .aside {
   width: 40%;
+  margin-top: 40px;
 }
 
 .formControl {

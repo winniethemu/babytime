@@ -36,7 +36,8 @@ export default function Content() {
   return (
     <div className={styles.content}>
       <main className={styles.main}>
-        <MyTimeline data={events} />
+        {events.length > 0 && <MyTimeline data={events} />}
+        {events.length < 1 && <p>~ nothing here yet ~</p>}
       </main>
       <aside className={styles.aside}>
         <MyForm submit={submit} />

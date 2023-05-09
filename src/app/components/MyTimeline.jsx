@@ -33,7 +33,7 @@ function createItem(metadata) {
           <TimelineDot>{icon}</TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }}>
+        <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
           {desc}
         </TimelineContent>
       </TimelineItem>
@@ -58,7 +58,7 @@ function createItem(metadata) {
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }}>
+        <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
           {desc} Start
         </TimelineContent>
       </TimelineItem>
@@ -78,7 +78,7 @@ function createItem(metadata) {
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }}>
+        <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
           {desc} End
         </TimelineContent>
       </TimelineItem>

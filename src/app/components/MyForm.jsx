@@ -16,6 +16,7 @@ export default function MyForm({ submit }) {
   function handleSubmit(event) {
     event.preventDefault();
     submit(activity, startTime, endTime);
+    handleReset();
   }
 
   function handleReset() {
