@@ -7,8 +7,14 @@ import MyForm from './MyForm';
 
 import styles from '../page.module.css';
 
-export default function Content({ initialEvents }) {
-  const [events, setEvents] = React.useState(initialEvents);
+export default function Content() {
+  const [events, setEvents] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch('/events').then(res => res.json()).then(json => {
+      setEvents(json.data);
+    });
+  });
 
   async function submit(activity, startTime, endTime) {
     const newItem = {
