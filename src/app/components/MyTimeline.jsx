@@ -1,3 +1,5 @@
+'use client';
+
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -14,8 +16,8 @@ import { EVENT_TYPE } from '../const';
 import { formatDate } from '../util';
 
 function createItem(metadata) {
-  const { start, end, icon, desc } = metadata;
-  if (!end) {
+  const { start_time, end_time, icon, desc } = metadata;
+  if (!end_time) {
     return (
       <TimelineItem>
         <TimelineOppositeContent
@@ -24,7 +26,7 @@ function createItem(metadata) {
           variant="body2"
           color="text.secondary"
         >
-          {formatDate(start)}
+          {formatDate(start_time)}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
@@ -47,7 +49,7 @@ function createItem(metadata) {
           variant="body2"
           color="text.secondary"
         >
-          {formatDate(start)}
+          {formatDate(start_time)}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
@@ -67,7 +69,7 @@ function createItem(metadata) {
           variant="body2"
           color="text.secondary"
         >
-          {formatDate(end)}
+          {formatDate(end_time)}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />

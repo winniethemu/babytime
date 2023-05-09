@@ -11,28 +11,28 @@ export function createEvents() {
   return [
     {
       type: EVENT_TYPE.feed,
-      start: Date.parse(FEED_START),
-      end: Date.parse(FEED_END),
+      start_time: Date.parse(FEED_START),
+      end_time: Date.parse(FEED_END),
     },
     {
       type: EVENT_TYPE.nappy1,
-      start: Date.parse(NAPPY_ONE),
-      end: null,
+      start_time: Date.parse(NAPPY_ONE),
+      end_time: null,
     },
     {
       type: EVENT_TYPE.spit,
-      start: Date.parse(SPIT),
-      end: null,
+      start_time: Date.parse(SPIT),
+      end_time: null,
     },
     {
       type: EVENT_TYPE.tummy,
-      start: Date.parse(TUMMY),
-      end: null,
+      start_time: Date.parse(TUMMY),
+      end_time: null,
     },
     {
       type: EVENT_TYPE.nappy2,
-      start: Date.parse(NAPPY_TWO),
-      end: null,
+      start_time: Date.parse(NAPPY_TWO),
+      end_time: null,
     },
   ];
 }
