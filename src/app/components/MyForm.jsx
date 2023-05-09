@@ -8,14 +8,14 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { EVENT_TYPE } from '../const';
 import styles from '../page.module.css';
 
-export default function MyForm() {
+export default function MyForm({ submit }) {
   const [activity, setActivity] = React.useState('');
   const [startTime, setStartTime] = React.useState(null);
   const [endTime, setEndTime] = React.useState(null);
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(activity, startTime, endTime);
+    submit(activity, startTime, endTime);
   }
 
   function handleReset() {

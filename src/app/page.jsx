@@ -1,8 +1,7 @@
 import React from 'react';
 import { sql } from '@vercel/postgres';
 
-import MyTimeline from './components/MyTimeline';
-import MyForm from './components/MyForm';
+import Content from './components/Content';
 import styles from './page.module.css';
 
 export default async function Home() {
@@ -15,14 +14,7 @@ export default async function Home() {
           <h1 className={styles.title}>Babytime</h1>
         </div>
       </div>
-      <div className={styles.content}>
-        <main className={styles.main}>
-          <MyTimeline data={rows} />
-        </main>
-        <aside className={styles.aside}>
-          <MyForm />
-        </aside>
-      </div>
+      <Content initialEvents={rows} />
     </>
   );
 }
