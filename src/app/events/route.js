@@ -8,6 +8,6 @@ export async function GET() {
 
 export async function POST(request) {
   const res = await request.json();
-  await sql`INSERT INTO events (type, start_time, end_time) VALUES (${res.type}, ${res.start_time}, ${res.end_time})`;
+  await sql`INSERT INTO events (type, time) VALUES (${res.type}, ${res.time})`;
   return NextResponse.json({ res });
 }

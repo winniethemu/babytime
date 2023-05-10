@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
 
-export function formatDate(timestamp) {
+export function formatDatetime(timestamp) {
   return dayjs(parseInt(timestamp, 10)).format('MMM D, YYYY h:mm A');
 }

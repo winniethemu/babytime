@@ -7,107 +7,100 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import AirlineSeatFlatIcon from '@mui/icons-material/AirlineSeatFlat';
-import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
-import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
-import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import {
+  AirlineSeatFlat,
+  BabyChangingStation,
+  JoinLeft,
+  JoinRight,
+  LocalDrink,
+  Medication,
+  RecordVoiceOver,
+} from '@mui/icons-material';
 
 import { EVENT_TYPE } from '../const';
-import { formatDate } from '../util';
+import { formatDatetime } from '../util';
 
-function createItem(metadata) {
-  const { start_time, end_time, icon, desc } = metadata;
-  if (!end_time) {
-    return (
-      <TimelineItem>
-        <TimelineOppositeContent
-          sx={{ m: 'auto 0' }}
-          align="right"
-          variant="body2"
-          color="text.secondary"
-        >
-          {formatDate(start_time)}
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineConnector />
-          <TimelineDot>{icon}</TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
-          {desc}
-        </TimelineContent>
-      </TimelineItem>
-    )
-  }
-
+function createItem({ index, desc, icon, iconStyle, time }) {
   return (
-    <>
-      <TimelineItem>
-        <TimelineOppositeContent
-          sx={{ m: 'auto 0' }}
-          align="right"
-          variant="body2"
-          color="text.secondary"
-        >
-          {formatDate(start_time)}
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineConnector />
-          <TimelineDot variant="outlined" sx={{ borderColor: '#FF5A5F', color: '#FF5A5F' }}>
-            {icon}
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
-          {desc} Start
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineOppositeContent
-          sx={{ m: 'auto 0' }}
-          align="right"
-          variant="body2"
-          color="text.secondary"
-        >
-          {formatDate(end_time)}
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineConnector />
-          <TimelineDot sx={{ bgcolor: '#FF5A5F' }}>
-            {icon}
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
-          {desc} End
-        </TimelineContent>
-      </TimelineItem>
-    </>
+    <TimelineItem key={index}>
+      <TimelineOppositeContent
+        sx={{ m: 'auto 0' }}
+        align="right"
+        variant="body2"
+        color="text.secondary"
+      >
+        {formatDatetime(time)}
+      </TimelineOppositeContent>
+      <TimelineSeparator>
+        <TimelineConnector />
+        <TimelineDot {...iconStyle}>
+          {icon}
+        </TimelineDot>
+        <TimelineConnector />
+      </TimelineSeparator>
+      <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
+        {desc}
+      </TimelineContent>
+    </TimelineItem>
   );
 }
 
 export default function MyTimeline({ data }) {
+  const config = {
+    [EVENT_TYPE.feedLeftBreast]: {
+      desc: 'FL',
+      icon: <JoinLeft />,
+      iconStyle: {
+        variant: 'outlined',
+        sx: { borderColor: '#FF5A5F', color: '#FF5A5F' },
+      },
+    },
+    [EVENT_TYPE.feedRightBreast]: {
+      desc: 'FR',
+      icon: <JoinRight />,
+      iconStyle: {
+        variant: 'outlined',
+        sx: { borderColor: '#FF5A5F', color: '#FF5A5F' },
+      },
+    },
+    [EVENT_TYPE.feedBottle]: {
+      desc: 'FB',
+      icon: <LocalDrink />,
+      iconStyle: {
+        variant: 'outlined',
+        sx: { borderColor: '#FF5A5F', color: '#FF5A5F' },
+      },
+    },
+    [EVENT_TYPE.feedStop]: {
+      desc: 'FX',
+      icon: <LocalDrink />,
+      iconStyle: {
+        variant: 'filled',
+        sx: { bgcolor: '#FF5A5F' },
+      },
+    },
+    [EVENT_TYPE.nappy1]: {
+      icon: <BabyChangingStation />,
+      desc: 'N1',
+    },
+    [EVENT_TYPE.nappy2]: {
+      icon: <BabyChangingStation />,
+      desc: 'N2',
+    },
+    [EVENT_TYPE.tummy]: {
+      icon: <AirlineSeatFlat />,
+      desc: 'TT',
+    },
+    [EVENT_TYPE.medicine]: {
+      icon: <Medication />,
+      desc: 'Med',
+    },
+  };
+
   return (
     <Timeline position="alternate">
       {data.map((item, index) => {
-        let icon;
-        switch (item.type) {
-          case EVENT_TYPE.feed:
-            icon = <LocalDrinkIcon />;
-            return createItem({ ...item, desc: 'Feed', icon });
-          case EVENT_TYPE.spit:
-            icon = <RecordVoiceOverIcon />;
-            return createItem({ ...item, desc: 'Spit', icon });
-          case EVENT_TYPE.tummy:
-            icon = <AirlineSeatFlatIcon />;
-            return createItem({ ...item, desc: 'Tummy', icon });
-          case EVENT_TYPE.nappy1:
-            icon = <BabyChangingStationIcon />;
-            return createItem({ ...item, desc: 'Nappy One', icon });
-          case EVENT_TYPE.nappy2:
-            icon = <BabyChangingStationIcon />;
-            return createItem({ ...item, desc: 'Nappy Two', icon });
-        }
+        return createItem({ index, ...item, ...config[item.type] });
       })}
     </Timeline>
   );

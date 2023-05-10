@@ -28,17 +28,8 @@
   margin-top: 40px;
 }
 
-.formControl {
-  margin-top: 10px;
-}
-
-.formSubmit {
+.row {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
-  margin-top: 20px;
-}
-
-.formSubmit button {
-  width: 50%;
+  margin-top: 10px;
 }

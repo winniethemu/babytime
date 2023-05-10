@@ -8,7 +8,7 @@ export default async function Home() {
     <>
       <div className={styles.navbar}>
         <div className={styles.content}>
-          <h1 className={styles.title}>Babytime</h1>
+          <h1 className={styles.title}>Shush!</h1>
         </div>
       </div>
       <Content />
