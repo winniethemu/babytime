@@ -48,7 +48,7 @@ function createItem({ index, desc, icon, iconStyle, time }) {
 export default function MyTimeline({ data }) {
   const config = {
     [EVENT_TYPE.feedLeftBreast]: {
-      desc: 'FL',
+      desc: 'fL',
       icon: <JoinLeft />,
       iconStyle: {
         variant: 'outlined',
@@ -56,7 +56,7 @@ export default function MyTimeline({ data }) {
       },
     },
     [EVENT_TYPE.feedRightBreast]: {
-      desc: 'FR',
+      desc: 'fR',
       icon: <JoinRight />,
       iconStyle: {
         variant: 'outlined',
@@ -64,7 +64,7 @@ export default function MyTimeline({ data }) {
       },
     },
     [EVENT_TYPE.feedBottle]: {
-      desc: 'FB',
+      desc: 'fB',
       icon: <LocalDrink />,
       iconStyle: {
         variant: 'outlined',
@@ -72,7 +72,7 @@ export default function MyTimeline({ data }) {
       },
     },
     [EVENT_TYPE.feedStop]: {
-      desc: 'FX',
+      desc: 'fX',
       icon: <LocalDrink />,
       iconStyle: {
         variant: 'filled',

@@ -20,7 +20,7 @@ export default function Content() {
   async function handleSubmit(type) {
     const newItem = { type, time: Date.now() };
     const items = events.slice();
-    items.push(newItem);
+    items.unshift(newItem);
     setEvents(items);
 
     await fetch('/events', {
@@ -39,36 +39,44 @@ export default function Content() {
       <aside className={styles.aside}>
         <div className={styles.row}>
           <Button
+            className={styles.cta}
             variant="outlined"
             onClick={() => handleSubmit(EVENT_TYPE.feedLeftBreast)}
           >fL</Button>
           <Button
+            className={styles.cta}
             variant="outlined"
             onClick={() => handleSubmit(EVENT_TYPE.feedRightBreast)}
           >fR</Button>
           <Button
+            className={styles.cta}
             variant="outlined"
             onClick={() => handleSubmit(EVENT_TYPE.feedBottle)}
           >fB</Button>
           <Button
+            className={styles.cta}
             variant="outlined"
             onClick={() => handleSubmit(EVENT_TYPE.feedStop)}
           >fX</Button>
         </div>
         <div className={styles.row}>
           <Button
+            className={styles.cta}
             variant="outlined"
             onClick={() => handleSubmit(EVENT_TYPE.nappy1)}
           >N1</Button>
           <Button
+            className={styles.cta}
             variant="outlined"
             onClick={() => handleSubmit(EVENT_TYPE.nappy2)}
           >N2</Button>
           <Button
+            className={styles.cta}
             variant="outlined"
             onClick={() => handleSubmit(EVENT_TYPE.tummy)}
           >TT</Button>
           <Button
+            className={styles.cta}
             variant="outlined"
             onClick={() => handleSubmit(EVENT_TYPE.medicine)}
           >Med</Button>

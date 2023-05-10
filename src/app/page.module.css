@@ -19,7 +19,7 @@
 
 .main {
   width: 60%;
-  margin-top: 40px;
+  margin: 40px auto;
   text-align: center;
 }
 
@@ -32,6 +32,10 @@
   display: flex;
   gap: 10px;
   margin-top: 10px;
+}
+
+.cta {
+  text-transform: none;
 }
 
 @media (max-width: 768px) {
