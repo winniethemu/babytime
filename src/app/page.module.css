@@ -35,7 +35,7 @@
 }
 
 .cta {
-  text-transform: none;
+  text-transform: none !important;
 }
 
 @media (max-width: 768px) {
