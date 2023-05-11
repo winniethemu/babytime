@@ -30,10 +30,17 @@ export default function Content() {
     });
   }
 
+  async function handleDelete(id) {
+    fetch(`/events/${id}`, { method: 'DELETE' }).then(() => {
+      const items = events.filter((event) => event.id !== id);
+      setEvents(items);
+    });
+  }
+
   return (
     <div className={styles.content}>
       <main className={styles.main}>
-        {events.length > 0 && <MyTimeline data={events} />}
+        {events.length > 0 && <MyTimeline data={events} handleDelete={handleDelete} />}
         {events.length < 1 && <p>~ nothing here yet ~</p>}
       </main>
       <aside className={styles.aside}>

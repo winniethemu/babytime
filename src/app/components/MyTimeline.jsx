@@ -19,32 +19,32 @@ import {
 import { EVENT_TYPE } from '../const';
 import { formatDatetime } from '../util';
 
-function createItem({ index, desc, icon, iconStyle, time }) {
-  return (
-    <TimelineItem key={index}>
-      <TimelineOppositeContent
-        sx={{ m: 'auto 0' }}
-        align="right"
-        variant="body2"
-        color="text.secondary"
-      >
-        {formatDatetime(time)}
-      </TimelineOppositeContent>
-      <TimelineSeparator>
-        <TimelineConnector />
-        <TimelineDot {...iconStyle}>
-          {icon}
-        </TimelineDot>
-        <TimelineConnector />
-      </TimelineSeparator>
-      <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
-        {desc}
-      </TimelineContent>
-    </TimelineItem>
-  );
-}
+export default function MyTimeline({ data, handleDelete }) {
+  function createItem({ index, desc, icon, iconStyle, id, time }) {
+    return (
+      <TimelineItem key={index} onClick={() => handleDelete(id)}>
+        <TimelineOppositeContent
+          sx={{ m: 'auto 0' }}
+          align="right"
+          variant="body2"
+          color="text.secondary"
+        >
+          {formatDatetime(time)}
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineConnector />
+          <TimelineDot {...iconStyle}>
+            {icon}
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
+          {desc}
+        </TimelineContent>
+      </TimelineItem>
+    );
+  }
 
-export default function MyTimeline({ data }) {
   const config = {
     [EVENT_TYPE.feedLeftBreast]: {
       desc: 'fL',
