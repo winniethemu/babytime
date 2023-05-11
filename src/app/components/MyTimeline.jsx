@@ -22,7 +22,14 @@ import { formatDatetime } from '../util';
 export default function MyTimeline({ data, handleDelete }) {
   function createItem({ index, desc, icon, iconStyle, id, time }) {
     return (
-      <TimelineItem key={index} onClick={() => handleDelete(id)}>
+      <TimelineItem
+        key={index}
+        onClick={() => {
+          if (confirm('Delete this event?')) {
+            handleDelete(id);
+          }
+        }}
+      >
         <TimelineOppositeContent
           sx={{ m: 'auto 0' }}
           align="right"
