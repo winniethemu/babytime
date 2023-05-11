@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 
 import MyTimeline from './MyTimeline';
 

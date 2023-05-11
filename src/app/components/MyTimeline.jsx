@@ -14,7 +14,6 @@ import {
   JoinRight,
   LocalDrink,
   Medication,
-  RecordVoiceOver,
 } from '@mui/icons-material';
 
 import { EVENT_TYPE } from '../const';
