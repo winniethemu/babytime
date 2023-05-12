@@ -10,6 +10,7 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import {
   AirlineSeatFlat,
   BabyChangingStation,
+  EventAvailable,
   JoinLeft,
   JoinRight,
   LocalDrink,
@@ -31,12 +32,10 @@ export default function MyTimeline({ data, handleDelete }) {
         }}
       >
         <TimelineOppositeContent
-          sx={{ m: 'auto 0' }}
           align="right"
-          variant="body2"
-          color="text.secondary"
+          sx={{ m: 'auto 0' }}
         >
-          {formatDatetime(time)}
+          {desc}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
@@ -45,8 +44,13 @@ export default function MyTimeline({ data, handleDelete }) {
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }} style={{ margin: 'auto 0' }}>
-          {desc}
+        <TimelineContent
+          color="text.secondary"
+          style={{ margin: 'auto 0' }}
+          sx={{ py: '12px', px: 2 }}
+          variant="body2"
+        >
+          {formatDatetime(time)}
         </TimelineContent>
       </TimelineItem>
     );
@@ -79,10 +83,10 @@ export default function MyTimeline({ data, handleDelete }) {
     },
     [EVENT_TYPE.feedStop]: {
       desc: 'fX',
-      icon: <LocalDrink />,
+      icon: <EventAvailable />,
       iconStyle: {
-        variant: 'filled',
-        sx: { bgcolor: '#FF5A5F' },
+        variant: 'outlined',
+        sx: { borderColor: '#FF5A5F', color: '#FF5A5F' },
       },
     },
     [EVENT_TYPE.nappy1]: {
@@ -104,7 +108,7 @@ export default function MyTimeline({ data, handleDelete }) {
   };
 
   return (
-    <Timeline position="alternate">
+    <Timeline>
       {data.map((item, index) => {
         return createItem({ index, ...item, ...config[item.type] });
       })}
