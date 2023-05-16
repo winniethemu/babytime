@@ -1,6 +1,5 @@
 'use client';
 
-import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
@@ -17,13 +16,14 @@ import {
   Medication,
 } from '@mui/icons-material';
 
+import { Timeline, TimelineEvent } from './timeline';
 import { EVENT_TYPE } from '../const';
 import { formatDatetime } from '../util';
 
 export default function MyTimeline({ data, handleDelete }) {
   function createItem({ index, desc, icon, iconStyle, id, time }) {
     return (
-      <TimelineItem
+      <TimelineEvent
         key={index}
         onClick={() => {
           if (confirm('Delete this event?')) {
@@ -52,7 +52,7 @@ export default function MyTimeline({ data, handleDelete }) {
         >
           {formatDatetime(time)}
         </TimelineContent>
-      </TimelineItem>
+      </TimelineEvent>
     );
   }
 
