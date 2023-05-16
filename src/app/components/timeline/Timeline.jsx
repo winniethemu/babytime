@@ -9,9 +9,10 @@ export default function Timeline({
   children,
   position = 'right',
   fancy = false,
+  ...props
 }) {
   return (
-    <ol>
+    <ol {...props}>
       <TimelineContext.Provider value={{ position, fancy }}>
         {children}
       </TimelineContext.Provider>

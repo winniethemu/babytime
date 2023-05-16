@@ -21,11 +21,11 @@ const Container = styled.li`
   }}
 `;
 
-export default function TimelineEvent({ children }) {
+export default function TimelineEvent({ children, ...props }) {
   const { position, fancy } = useContext(TimelineContext);
 
   return (
-    <Container position={position} fancy={fancy}>
+    <Container position={position} fancy={fancy} {...props}>
       {children}
     </Container>
   );
