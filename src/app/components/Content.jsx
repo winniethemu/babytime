@@ -4,18 +4,25 @@ import React from 'react';
 import { Button } from '@mui/material';
 
 import MyTimeline from './MyTimeline';
-
 import styles from '../page.module.css';
 import { EVENT_TYPE } from '../const';
+import { useOnScreen } from '../util';
 
 export default function Content() {
   const [events, setEvents] = React.useState([]);
+  const [day, setDay] = React.useState(1);
+  const bottomRef = React.createRef();
+  const isOnScreen = useOnScreen(bottomRef);
 
   React.useEffect(() => {
-    fetch('/events').then(res => res.json()).then(json => {
-      setEvents(json.data);
-    });
-  }, []);
+    if (isOnScreen) {
+      fetch(`/events?d=${day}`).then(res => res.json()).then(json => {
+        setEvents(json.data);
+        // if pagination returns some results
+        if (json.data.length > 0) setDay(day+1);
+      });
+    }
+  }, [day, isOnScreen]);
 
   async function handleSubmit(type) {
     const newItem = { type, time: Date.now() };
@@ -42,6 +49,7 @@ export default function Content() {
       <main className={styles.main}>
         {events.length > 0 && <MyTimeline data={events} handleDelete={handleDelete} />}
         {events.length < 1 && <p>~ nothing here yet ~</p>}
+        <div ref={bottomRef}></div>
       </main>
       <aside className={styles.aside}>
         <div className={styles.row}>

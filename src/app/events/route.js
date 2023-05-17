@@ -3,10 +3,16 @@ import { sql } from '@vercel/postgres';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
-  const since = searchParams.get('d') || 2;
+  const since = searchParams.get('d') || 1;
   if (process.env.VERCEL_ENV === 'development') {
-    const { rows } =
-      await sql`SELECT * from events_test WHERE time > (extract(epoch from now()) - ${since} * 86400) * 1000 ORDER BY time DESC`;
+    // doesn't work, there could be days without data, which would
+    // mislead frontend logic
+    const { rows } = await sql`
+      SELECT * FROM events_test
+      WHERE
+        time > (extract(epoch from now()) - ${since} * 86400) * 1000 AND
+        time < (extract(epoch from now()) - ${since - 1} * 86400) * 1000
+      ORDER BY time DESC`;
     return NextResponse.json({ data: rows });
   } else {
     const { rows } =
