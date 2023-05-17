@@ -7,5 +7,5 @@ export async function DELETE(_req, { params }) {
   } else {
     await sql`DELETE FROM events WHERE id=${params.id}`;
   }
-  return NextResponse.json({});
+  return new NextResponse();
 }
