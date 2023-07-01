@@ -1,11 +1,9 @@
 import { NextResponse } from 'next/server';
-import { sql } from '@vercel/postgres';
+import { supabase } from '../../db';
 
 export async function DELETE(_req, { params }) {
-  if (process.env.VERCEL_ENV === 'development') {
-    await sql`DELETE FROM events_test WHERE id=${params.id}`;
-  } else {
-    await sql`DELETE FROM events WHERE id=${params.id}`;
-  }
+  let table =
+    process.env.VERCEL_ENV === 'development' ? 'events_test' : 'events';
+  await supabase.from(table).delete().eq('id', params.id);
   return NextResponse.json({});
 }

@@ -1,26 +1,21 @@
 import { NextResponse } from 'next/server';
-import { sql } from '@vercel/postgres';
+import { supabase } from '../db';
 
 export async function GET() {
-  if (process.env.VERCEL_ENV === 'development') {
-    const { rows } = await sql`
-      SELECT * from events_test WHERE time > extract(epoch from (now() - interval '2 day')) * 1000 ORDER BY time DESC
-    `;
-    return NextResponse.json({ data: rows });
-  } else {
-    const { rows } = await sql`
-      SELECT * from events WHERE time > extract(epoch from (now() - interval '2 day')) * 1000 ORDER BY time DESC
-    `;
-    return NextResponse.json({ data: rows });
-  }
+  let table =
+    process.env.VERCEL_ENV === 'development' ? 'events_test' : 'events';
+  const { data } = await supabase
+    .from(table)
+    .select()
+    .order('time', { ascending: false })
+    .limit(30);
+  return NextResponse.json({ data });
 }
 
 export async function POST(req) {
   const json = await req.json();
-  if (process.env.VERCEL_ENV === 'development') {
-    await sql`INSERT INTO events_test (type, time) VALUES (${json.type}, ${json.time})`;
-  } else {
-    await sql`INSERT INTO events (type, time) VALUES (${json.type}, ${json.time})`;
-  }
+  let table =
+    process.env.VERCEL_ENV === 'development' ? 'events_test' : 'events';
+  await supabase.from(table).insert({ type: json.type, time: json.time });
   return new NextResponse();
 }
